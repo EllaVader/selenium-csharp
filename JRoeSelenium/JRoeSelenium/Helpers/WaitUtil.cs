@@ -10,7 +10,7 @@ namespace JRoeSelenium.Helpers
     /// state is changing on the elemnt.  This defines the Explicit wait for element
     /// that is often used when iteracting with elements.
     /// </summary>
-    public class WaitUtil
+    public static class WaitUtil
     {
         private WebDriverWait _wait;
         private IWebDriver _driver;

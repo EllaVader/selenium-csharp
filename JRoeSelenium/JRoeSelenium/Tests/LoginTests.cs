@@ -1,8 +1,6 @@
-using JRoeSelenium.Helpers;
 using JRoeSelenium.Pages;
 using NUnit.Framework;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
 
 namespace JRoeSelenium.Tests
 {
@@ -15,21 +13,10 @@ namespace JRoeSelenium.Tests
     /// decorator at the top of the class
     /// </summary>
     /// <typeparam name="TWebDriver">The browser type to instantiate and run the test</typeparam>
-    [TestFixture(typeof(ChromeDriver))]
-    public class LoginTests<TWebDriver> where TWebDriver : IWebDriver, new()
+    public class LoginTest<TWebDriver> : TestBase<TWebDriver> where TWebDriver : IWebDriver, new()
     {
-        protected static string BaseUrl = "https://the-internet.herokuapp.com/login";
-        protected IWebDriver Driver;
         public string Username = "tomsmith";
         public string Password = "SuperSecretPassword!";
-
-        [SetUp]
-        public void Setup()
-        {
-            Driver = new TWebDriver();//new ChromeDriver();
-            Console.Out.WriteLine($"Starting {DriverHelper.GetDriverName(Driver)} browser");
-            Driver.Url = BaseUrl;
-        }
 
         [Test]
         public void LoginUser()
@@ -86,12 +73,6 @@ namespace JRoeSelenium.Tests
             return secureAreaPage;
         }
 
-        [TearDown]
-        public void Teardown()
-        {
-            Console.Out.WriteLine($"Finishing Test: {TestContext.CurrentContext.Test.Name}");
-            Console.Out.WriteLine($"Closing {DriverHelper.GetDriverName(Driver)} browser");
-            Driver.Quit();
-        }
+
     }
 }
